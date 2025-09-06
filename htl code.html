@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hotel Management System – Project Overview</title>
+  <meta name="description" content="Single-page hotel management project website aligned to PPT sections." />
+  <style>
+    :root {
+      --bg: #0b1220;
+      --card: #111a2b;
+      --muted: #9fb3c8;
+      --text: #e6eef8;
+      --brand: #5ac4ff;
+      --accent: #9dffb0;
+      --danger: #ff7d7d;
+      --ring: rgba(90,196,255,0.35);
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji"; color: var(--text); background: radial-gradient(1200px 800px at 80% -20%, rgba(90,196,255,0.08), transparent), var(--bg); }
+    a { color: var(--brand); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .container { max-width: 1152px; margin: 0 auto; padding: 24px; }
+    header { position: sticky; top: 0; z-index: 50; backdrop-filter: blur(8px); background: linear-gradient(180deg, rgba(11,18,32,0.95), rgba(11,18,32,0.65)); border-bottom: 1px solid rgba(159,179,200,0.15); }
+    .nav { display: flex; align-items: center; gap: 16px; }
+    .logo { font-weight: 800; letter-spacing: 0.4px; }
+    .spacer { flex: 1; }
+    .nav a { padding: 10px 12px; border-radius: 999px; }
+    .nav a:hover { background: rgba(159,179,200,0.12); text-decoration: none; }
+    .btn { display: inline-flex; align-items: center; gap: 8px; border: 1px solid rgba(159,179,200,0.25); background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.01)); color: var(--text); padding: 10px 14px; border-radius: 12px; cursor: pointer; transition: transform .05s ease; }
+    .btn.primary { border-color: transparent; background: linear-gradient(180deg, #5ac4ff, #4090ff); color: #061221; box-shadow: 0 8px 24px rgba(90,196,255,0.33); }
+    .btn:active { transform: translateY(1px); }
+
+    .hero { display: grid; grid-template-columns: 1.2fr 1fr; gap: 28px; align-items: center; padding: 48px 0 8px; }
+    .hero h1 { font-size: clamp(28px, 3.4vw, 48px); margin: 0 0 12px; }
+    .hero p { color: var(--muted); font-size: clamp(14px, 1.6vw, 18px); margin: 0 0 18px; }
+    .card { background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01)); border: 1px solid rgba(159,179,200,0.18); border-radius: 18px; box-shadow: 0 10px 30px rgba(0,0,0,0.25); }
+    .panel { padding: 18px; }
+
+    section { scroll-margin-top: 80px; margin: 26px 0; }
+    .section-title { font-size: 22px; margin: 0 0 10px; }
+    .subtle { color: var(--muted); font-size: 14px; margin: 6px 0 14px; }
+
+    .grid { display: grid; gap: 16px; }
+    .grid.cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .grid.cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid.cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    @media (max-width: 960px) { .hero { grid-template-columns: 1fr; } .grid.cols-3, .grid.cols-4, .grid.cols-2 { grid-template-columns: 1fr; } }
+
+    .kpi { display: grid; gap: 6px; padding: 14px; border-radius: 16px; border: 1px dashed rgba(159,179,200,0.25); background: rgba(159,179,200,0.06); }
+    .kpi .label { color: var(--muted); font-size: 12px; }
+    .kpi .value { font-size: 22px; font-weight: 700; letter-spacing: 0.3px; }
+
+    ul.clean { list-style: none; padding: 0; margin: 0; }
+    ul.clean li { padding: 8px 10px; border-radius: 12px; border: 1px solid rgba(159,179,200,0.12); background: rgba(255,255,255,0.02); margin-bottom: 8px; }
+
+    .tag { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; padding: 6px 10px; border-radius: 999px; border: 1px solid rgba(159,179,200,0.2); background: rgba(159,179,200,0.08); }
+
+    .pill { font-size: 12px; padding: 4px 10px; border-radius: 999px; border: 1px solid rgba(159,179,200,0.2); }
+
+    .table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    .table th, .table td { padding: 10px 12px; border-bottom: 1px solid rgba(159,179,200,0.18); text-align: left; }
+    .table th { color: var(--muted); font-weight: 600; }
+
+    .form-row { display: grid; gap: 10px; grid-template-columns: repeat(2, 1fr); }
+    .form-row > div { display: grid; gap: 6px; }
+    .form-row input, .form-row select, textarea { background: #0d1728; color: var(--text); border: 1px solid rgba(159,179,200,0.25); border-radius: 12px; padding: 10px 12px; outline: none; }
+    .form-row input:focus, .form-row select:focus, textarea:focus { box-shadow: 0 0 0 4px var(--ring); border-color: var(--brand); }
+
+    .notice { font-size: 12px; color: var(--muted); }
+    .ok { color: var(--accent); }
+    .bad { color: var(--danger); }
+
+    .footer { border-top: 1px solid rgba(159,179,200,0.18); padding: 32px 0; color: var(--muted); font-size: 14px; }
+    .small { font-size: 12px; color: var(--muted); }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="logo">🏨 HotelMgmt<span style="color:var(--brand)">.pro</span></div>
+      <a href="#intro">Intro</a>
+      <a href="#modules">Modules</a>
+      <a href="#architecture">Architecture</a>
+      <a href="#demo">Demo UI</a>
+      <a href="#booking">Booking</a>
+      <a href="#reports">Reports</a>
+      <a href="#ppt">PPT Mapping</a>
+      <span class="spacer"></span>
+      <button class="btn primary" onclick="document.getElementById('booking').scrollIntoView({behavior:'smooth'})">Book a Room</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- HERO / SUMMARY -->
+    <section id="intro" class="hero">
+      <div>
+        <h1>Hotel Management System</h1>
+        <p>End‑to‑end solution for reservations, room inventory, housekeeping, billing, and analytics. This single page mirrors your PPT so you can submit a <strong>code + presentation</strong> bundle.</p>
+        <div style="display:flex; gap:10px; flex-wrap:wrap">
+          <span class="tag">✔ Online Reservations</span>
+          <span class="tag">✔ Room & Rate Plans</span>
+          <span class="tag">✔ Housekeeping</span>
+          <span class="tag">✔ POS & Billing</span>
+          <span class="tag">✔ Reports</span>
+        </div>
+        <div style="display:flex; gap:10px; margin-top:16px">
+          <button class="btn" onclick="document.getElementById('ppt').scrollIntoView({behavior:'smooth'})">View PPT Outline</button>
+          <button class="btn" onclick="document.getElementById('demo').scrollIntoView({behavior:'smooth'})">See Demo UI</button>
+        </div>
+      </div>
+      <div class="card panel">
+        <div class="grid cols-2">
+          <div class="kpi"><span class="label">Avg. Occupancy</span><span class="value" id="kpiOcc">74%</span></div>
+          <div class="kpi"><span class="label">Monthly Bookings</span><span class="value" id="kpiBook">1,246</span></div>
+          <div class="kpi"><span class="label">Housekeeping Tasks</span><span class="value" id="kpiHk">87</span></div>
+          <div class="kpi"><span class="label">RevPAR</span><span class="value" id="kpiRev">₹4,320</span></div>
+        </div>
+        <p class="small" style="margin-top:10px">KPI numbers are mock values updated by JS – replace with your data if needed.</p>
+      </div>
+    </section>
+
+    <!-- MODULES -->
+    <section id="modules">
+      <h2 class="section-title">Core Modules</h2>
+      <p class="subtle">Map these to your PPT slides: <strong>
